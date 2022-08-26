@@ -1,7 +1,7 @@
-import 'package:bloom_mobile/widgets/chat_input.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/chat_bubble.dart';
+import '../widgets/chat_input.dart';
 
 class Chat extends StatelessWidget {
   static const String routName = '/chat';
