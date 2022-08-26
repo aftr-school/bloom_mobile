@@ -1,3 +1,4 @@
+import 'package:bloom_mobile/widgets/chat_input.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/chat_bubble.dart';
@@ -38,7 +39,7 @@ class Chat extends StatelessWidget {
               itemCount: 10,
             ),
           ),
-          const Text('Input Text'),
+          const ChatInput(),
         ],
       ),
     );
