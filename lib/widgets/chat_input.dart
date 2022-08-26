@@ -29,9 +29,9 @@ class ChatInput extends StatelessWidget {
                   child: IconButton(
                     onPressed: () {},
                     splashRadius: 24,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.attach_file,
-                      color: Colors.white,
+                      color: Theme.of(context).iconTheme.color,
                     ),
                   ),
                 ),

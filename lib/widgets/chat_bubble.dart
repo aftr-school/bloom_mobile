@@ -18,8 +18,12 @@ class ChatBubble extends StatelessWidget {
               color: Theme.of(context).colorScheme.secondary,
               borderRadius: BorderRadius.circular(16),
             ),
-            child: const Text(
+            child: Text(
               'masih ada aku temanimu disini',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: Colors.white),
             ),
           ),
         ),
