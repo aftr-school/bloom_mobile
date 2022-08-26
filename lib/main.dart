@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'navigations/bottom_navbar.dart';
+import 'screens/chat.dart';
 import 'themes/dark_theme.dart';
 import 'themes/light_theme.dart';
 
@@ -20,7 +21,10 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
-      routes: {'/': (context) => const BottomNavbar()},
+      routes: {
+        '/': (context) => const BottomNavbar(),
+        Chat.routName: (context) => const Chat()
+      },
     );
   }
 }

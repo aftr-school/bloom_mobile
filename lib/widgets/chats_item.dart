@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../screens/chat.dart';
+
 class ChatsItem extends StatelessWidget {
   final String name;
   final String lastMessage;
@@ -18,6 +20,8 @@ class ChatsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      enableFeedback: false,
+      onTap: () => Navigator.of(context).pushNamed(Chat.routName),
       leading: CircleAvatar(foregroundImage: NetworkImage(avatar)),
       title: Text(name),
       subtitle: Text(lastMessage),
