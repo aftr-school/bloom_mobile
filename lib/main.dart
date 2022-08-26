@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'screens/home.dart';
+import 'navigations/bottom_navbar.dart';
 import 'themes/dark_theme.dart';
 import 'themes/light_theme.dart';
 
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
-      home: const Home(),
+      routes: {'/': (context) => const BottomNavbar()},
     );
   }
 }
