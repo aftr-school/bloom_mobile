@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/chat_bubble.dart';
+
 class Chat extends StatelessWidget {
   static const String routName = '/chat';
 
@@ -9,10 +11,20 @@ class Chat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded),
-          enableFeedback: false,
-          onPressed: () => Navigator.pop(context),
+        leadingWidth: 90,
+        leading: Row(
+          children: [
+            IconButton(
+              icon: const Icon(Icons.arrow_back_rounded),
+              enableFeedback: false,
+              onPressed: () => Navigator.pop(context),
+              splashRadius: 20,
+            ),
+            const CircleAvatar(
+              foregroundImage: NetworkImage(
+                  'https://cdn.discordapp.com/avatars/310329118866669570/b7dd8af23d5d94b36197a96b5fbb3349.png?size=4096'),
+            ),
+          ],
         ),
         title: const Text('Someone'),
       ),
@@ -20,7 +32,10 @@ class Chat extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              itemBuilder: (context, index) => const Text('ok'),
+              physics: const BouncingScrollPhysics(),
+              reverse: true,
+              itemBuilder: (context, index) => const ChatBubble(),
+              itemCount: 10,
             ),
           ),
           const Text('Input Text'),
