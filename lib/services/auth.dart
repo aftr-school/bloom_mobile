@@ -54,6 +54,8 @@ class AuthService {
       "Authorization": "Bearer $token",
     });
 
+    print(HttpResponse.fromJson(res.statusCode, res.body));
+
     return HttpResponse.fromJson(res.statusCode, res.body);
   }
 
@@ -69,7 +71,7 @@ class AuthService {
 
       if (res.statusCode == 422) {
         snackbarError(jsonDecode(res.raw.body).toString());
-      } else if (res.body.status == 'success') {
+      } else if (res.statusCode == 201) {
         Get.offNamed('login');
 
         snackbarSuccess(res.body.message);
@@ -87,17 +89,18 @@ class AuthService {
 
       storage.write('token', res.body.data['token']);
 
-      if (res.body.status == 'success') {
+      if (res.statusCode == 200) {
         HttpResponse user = await _get(res.body.data['token']);
 
         storage.write('userId', user.body.data['id']);
         storage.write('name', user.body.data['name']);
 
-        Get.offNamed('/');
+        Get.offAllNamed('/');
       } else {
         snackbarError(res.body.message);
       }
     } catch (e) {
+      print(e);
       snackbarError(e.toString());
     }
   }
