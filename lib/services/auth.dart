@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:http/http.dart' as http;
 
-import '../components/snackbar.dart';
-import 'http_response.dart';
+import 'package:bloom_mobile/components/snackbar.dart';
+import 'package:bloom_mobile/services/http_response.dart';
 
 var api = dotenv.env['API_URL']!;
 
@@ -21,18 +23,18 @@ class AuthService {
         "username": data.username,
         "email": data.email,
         "password": data.password,
-        "roleId": data.roleId.toString(),
+        "role_id": data.roleId.toString(),
         "address": data.address,
-        "regenciesId": data.regenciesId.toString(),
-        "villagesId": data.villagesId.toString(),
-        "districtsId": data.districtsId.toString(),
-        "provincesId": data.provincesId.toString(),
+        "regencies_id": data.regenciesId.toString(),
+        "villages_id": data.villagesId.toString(),
+        "districts_id": data.districtsId.toString(),
+        "provinces_id": data.provincesId.toString(),
         "latitude": data.latitude,
         "longitude": data.longitude,
       },
     );
 
-    HttpResponseWithError.fromJson(res.statusCode, res.body, res);
+    return HttpResponseWithError.fromJson(res.statusCode, res.body, res);
   }
 
   _login(Login data) async {
@@ -63,13 +65,13 @@ class AuthService {
 
   registerService(Register data) async {
     try {
-      final res = await _register(data);
-
-      print(res.raw);
+      HttpResponseWithError res = await _register(data);
 
       if (res.statusCode == 422) {
-        snackbarError(res.raw);
+        snackbarError(jsonDecode(res.raw.body).toString());
       } else if (res.body.status == 'success') {
+        Get.offNamed('login');
+
         snackbarSuccess(res.body.message);
       } else {
         snackbarError(res.body.message);

@@ -9,10 +9,8 @@ import 'screens/register.dart';
 
 import 'navigations/bottom_navbar.dart';
 import 'screens/chat.dart';
-import 'screens/login.dart';
 import 'screens/order.dart';
 import 'screens/product_detail.dart';
-import 'screens/splashscreen.dart';
 import 'screens/transaction.dart';
 import 'themes/dark_theme.dart';
 import 'themes/light_theme.dart';
@@ -36,8 +34,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       initialRoute: '/splash',
       getPages: [
-        GetPage(name: '/splash', page: () => const SplashScreen()),
-        GetPage(name: '/login', page: () => const LoginPage()),
+        GetPage(name: '/register', page: () => const RegisterPage()),
         GetPage(name: '/', page: () => const BottomNavbar()),
         GetPage(name: SplashScreen.routeName, page: () => const SplashScreen()),
         GetPage(name: LoginPage.routeName, page: () => const LoginPage()),
