@@ -8,30 +8,14 @@ class ProfileButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          alignment: Alignment.center,
-          child: ElevatedButton(
-            onPressed: () => AuthService().logoutService(),
-            style: ElevatedButton.styleFrom(
-              enableFeedback: false,
-              primary: Theme.of(context).colorScheme.secondary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
-            child: const Text(
-              'Edit Profile',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          alignment: Alignment.center,
-          child: ElevatedButton(
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      alignment: Alignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ElevatedButton(
             onPressed: () => Get.toNamed('add-product'),
             style: ElevatedButton.styleFrom(
               enableFeedback: false,
@@ -45,8 +29,23 @@ class ProfileButtons extends StatelessWidget {
               style: TextStyle(color: Colors.white),
             ),
           ),
-        )
-      ],
+          const SizedBox(width: 16),
+          ElevatedButton(
+            onPressed: () => AuthService().logoutService(),
+            style: ElevatedButton.styleFrom(
+              enableFeedback: false,
+              primary: Theme.of(context).colorScheme.secondary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+            ),
+            child: const Text(
+              'Edit Profile',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
