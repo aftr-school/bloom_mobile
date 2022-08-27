@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:bloom_mobile/services/auth.dart';
-
 import '../services/auth.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,8 +15,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPage extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   bool isLoading = false;
 
@@ -26,23 +24,26 @@ class _LoginPage extends State<LoginPage> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
-      await AuthService().loginService(Login(
-        username: usernameController.text,
-        password: passwordController.text,
-      ));
+      await AuthService().loginService(
+        Login(
+          username: usernameController.text,
+          password: passwordController.text,
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.only(top: 180, left: 20, right: 20),
-          child: Column(children: [
-            Container(
-              padding: const EdgeInsets.all((25)),
-              child: Column(children: [
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 5),
                   child: const Text(
@@ -51,17 +52,17 @@ class _LoginPage extends State<LoginPage> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(bottom: 25),
+                  margin: const EdgeInsets.only(bottom: 32),
                   child: const Text(
                     "Please Sign in to continue",
                     style: TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                 ),
                 loginForm()
-              ]),
+              ],
             ),
-          ]),
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -70,42 +71,52 @@ class _LoginPage extends State<LoginPage> {
     return Form(
       key: _formKey,
       child: Wrap(
-        runSpacing: 20,
-        children: <Widget>[
+        runSpacing: 16,
+        children: [
           TextFormField(
             controller: usernameController,
             decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              contentPadding: const EdgeInsets.only(left: 10),
-              focusedBorder: OutlineInputBorder(
-                borderSide:
-                    BorderSide(color: Theme.of(context).colorScheme.secondary),
-              ),
               hintText: 'username',
+              contentPadding: const EdgeInsets.all(16),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
             ),
             style: Theme.of(context).textTheme.labelMedium,
           ),
           TextFormField(
             controller: passwordController,
             decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              contentPadding: const EdgeInsets.only(left: 10),
-              focusedBorder: OutlineInputBorder(
-                borderSide:
-                    BorderSide(color: Theme.of(context).colorScheme.secondary),
-              ),
               hintText: 'Password',
+              contentPadding: const EdgeInsets.only(left: 16),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
             ),
             style: Theme.of(context).textTheme.labelMedium,
             obscureText: true,
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            alignment: Alignment.bottomRight,
+          SizedBox(
+            width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: const Size.fromHeight(40),
+                enableFeedback: false,
                 primary: Theme.of(context).colorScheme.secondary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
               ),
               onPressed: handleSubmit,
               child: const Text(
@@ -118,7 +129,17 @@ class _LoginPage extends State<LoginPage> {
           ),
           TextButton(
             onPressed: () => Get.toNamed('register'),
-            child: const Text("Register here", style: TextStyle(color: Colors.blue)),
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero,
+              minimumSize: const Size(0, 0),
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              splashFactory: NoSplash.splashFactory,
+              enableFeedback: false,
+            ),
+            child: const Text(
+              "Register here",
+              style: TextStyle(color: Colors.blue),
+            ),
           )
         ],
       ),
