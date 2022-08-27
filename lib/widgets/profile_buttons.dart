@@ -1,3 +1,4 @@
+import 'package:bloom_mobile/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfileButtons extends StatelessWidget {
@@ -9,7 +10,7 @@ class ProfileButtons extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16),
       alignment: Alignment.center,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () => AuthService().logoutService(),
         style: ElevatedButton.styleFrom(
           enableFeedback: false,
           primary: Theme.of(context).colorScheme.secondary,
