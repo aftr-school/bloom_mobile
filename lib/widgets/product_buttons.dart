@@ -20,7 +20,12 @@ class ProductButtons extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: const Text('Decline'),
+              child: const Text(
+                'Decline',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
           const SizedBox(width: 16),
@@ -34,7 +39,12 @@ class ProductButtons extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: const Text('Accept'),
+              child: const Text(
+                'Accept',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
           const SizedBox(width: 8),
