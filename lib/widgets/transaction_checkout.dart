@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../screens/order.dart';
 
 class TransactionCheckout extends StatelessWidget {
   final String totalAmounts;
@@ -38,7 +41,7 @@ class TransactionCheckout extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => Get.toNamed(Order.routName),
               style: ElevatedButton.styleFrom(
                 enableFeedback: false,
                 primary: Theme.of(context).colorScheme.secondary,

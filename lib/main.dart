@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'navigations/bottom_navbar.dart';
 import 'screens/chat.dart';
 import 'screens/login.dart';
+import 'screens/order.dart';
 import 'screens/product_detail.dart';
 import 'screens/splashscreen.dart';
 import 'screens/transaction.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: ProductDetail.routeName, page: () => const ProductDetail()),
         GetPage(name: Transaction.routName, page: () => const Transaction()),
+        GetPage(name: Order.routName, page: () => const Order()),
       ],
     );
   }
