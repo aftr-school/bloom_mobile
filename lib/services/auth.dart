@@ -90,6 +90,7 @@ class AuthService {
       if (res.body.status == 'success') {
         HttpResponse user = await _get(res.body.data['token']);
 
+        storage.write('userId', user.body.data['id']);
         storage.write('name', user.body.data['name']);
 
         Get.offNamed('/');

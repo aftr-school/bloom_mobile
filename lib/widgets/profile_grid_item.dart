@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import '../screens/product_detail.dart';
 
 class ProfileGridItem extends StatelessWidget {
-  const ProfileGridItem({Key? key}) : super(key: key);
+  final data;
+  const ProfileGridItem({Key? key, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class ProfileGridItem extends StatelessWidget {
                     color: Theme.of(context).colorScheme.secondary.withOpacity(0.8),
                     borderRadius: BorderRadius.circular(6)),
                 child: Text(
-                  'Rice',
+                  data['name'],
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               )
@@ -31,7 +32,7 @@ class ProfileGridItem extends StatelessWidget {
           ),
           footer: GridTileBar(
             title: const Text('Padi Kualitas tinggi'),
-            subtitle: const Text('Rp50.000 / kg'),
+            subtitle: Text('Rp${data['productFarmer']['price']} / ${data['uom']}'),
             backgroundColor: Theme.of(context).cardTheme.color,
           ),
           child: Image.network(

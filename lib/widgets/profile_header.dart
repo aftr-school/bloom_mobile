@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({Key? key}) : super(key: key);
+  final data;
+  const ProfileHeader({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class ProfileHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'Your Maple Leaf',
+                  data['name'],
                   style: Theme.of(context).textTheme.headline6,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
@@ -36,8 +37,8 @@ class ProfileHeader extends StatelessWidget {
                     splashFactory: NoSplash.splashFactory,
                     enableFeedback: true,
                   ),
-                  child: const Text(
-                    'Jl. katapang menuju soreang km 18',
+                  child: Text(
+                    data['address']['address'],
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                   ),

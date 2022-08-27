@@ -1,3 +1,4 @@
+import 'package:bloom_mobile/screens/add_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
@@ -37,10 +38,10 @@ class MyApp extends StatelessWidget {
         GetPage(name: SplashScreen.routeName, page: () => const SplashScreen()),
         GetPage(name: LoginPage.routeName, page: () => const LoginPage()),
         GetPage(name: Chat.routName, page: () => const Chat()),
-        GetPage(
-            name: ProductDetail.routeName, page: () => const ProductDetail()),
+        GetPage(name: ProductDetail.routeName, page: () => const ProductDetail()),
         GetPage(name: Transaction.routName, page: () => const Transaction()),
         GetPage(name: Order.routeName, page: () => const Order()),
+        GetPage(name: '/add-product', page: () => const AddProduct()),
       ],
     );
   }
