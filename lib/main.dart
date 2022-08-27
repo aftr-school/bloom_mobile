@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
 
 import 'navigations/bottom_navbar.dart';
 import 'screens/chat.dart';
+import 'screens/login.dart';
 import 'screens/product_detail.dart';
+import 'screens/splashscreen.dart';
 import 'screens/transaction.dart';
 import 'themes/dark_theme.dart';
 import 'themes/light_theme.dart';
 
-void main() {
+void main() async {
+  await dotenv.load();
+
   runApp(const MyApp());
 }
 
@@ -16,18 +22,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Bloom',
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
-      routes: {
-        '/': (context) => const BottomNavbar(),
-        Chat.routName: (context) => const Chat(),
-        ProductDetail.routeName: (context) => const ProductDetail(),
-        Transaction.routName: (context) => const Transaction(),
-      },
+      initialRoute: '/splash',
+      getPages: [
+        GetPage(name: '/splash', page: () => const SplashScreen()),
+        GetPage(name: '/login', page: () => const LoginPage()),
+        GetPage(name: '/', page: () => const BottomNavbar()),
+        GetPage(name: Chat.routName, page: () => const Chat()),
+        GetPage(
+            name: ProductDetail.routeName, page: () => const ProductDetail()),
+        GetPage(name: Transaction.routName, page: () => const Transaction()),
+      ],
     );
   }
 }

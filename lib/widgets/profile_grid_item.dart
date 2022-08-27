@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../screens/product_detail.dart';
 
@@ -8,7 +9,7 @@ class ProfileGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(ProductDetail.routeName),
+      onTap: () => Get.toNamed(ProductDetail.routeName),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: GridTile(
@@ -19,10 +20,7 @@ class ProfileGridItem extends StatelessWidget {
                 margin: const EdgeInsets.all(16),
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                 decoration: BoxDecoration(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .secondary
-                        .withOpacity(0.8),
+                    color: Theme.of(context).colorScheme.secondary.withOpacity(0.8),
                     borderRadius: BorderRadius.circular(6)),
                 child: Text(
                   'Rice',

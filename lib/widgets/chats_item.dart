@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../screens/chat.dart';
@@ -21,7 +22,7 @@ class ChatsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       enableFeedback: false,
-      onTap: () => Navigator.of(context).pushNamed(Chat.routName),
+      onTap: () => Get.toNamed(Chat.routName),
       leading: CircleAvatar(foregroundImage: NetworkImage(avatar)),
       title: Text(name),
       subtitle: Text(lastMessage),
