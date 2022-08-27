@@ -94,7 +94,7 @@ class AuthService {
 
         storage.write('name', user.body.data['name']);
 
-        Get.offNamed('/');
+        Get.offAllNamed('/');
       } else {
         snackbarError(res.body.message);
       }
