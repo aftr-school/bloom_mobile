@@ -38,8 +38,8 @@ class _RegisterPage extends State<RegisterPage> {
           regenciesId: int.parse(regency),
           districtsId: int.parse(district),
           villagesId: int.parse(village),
-          latitude: '',
-          longitude: '',
+          latitude: '-6.494451239949463',
+          longitude: '106.80363584073018',
         ),
       );
     }
