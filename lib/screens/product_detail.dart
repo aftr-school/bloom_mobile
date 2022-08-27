@@ -1,6 +1,6 @@
-import 'package:bloom_mobile/widgets/product_buttons.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/product_buttons.dart';
 import '../widgets/product_images.dart';
 import '../widgets/product_title.dart';
 
