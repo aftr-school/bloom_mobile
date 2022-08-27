@@ -1,8 +1,9 @@
-import 'package:bloom_mobile/components/snackbar.dart';
-import 'package:bloom_mobile/services/address.dart';
-import 'package:bloom_mobile/services/auth.dart';
-import 'package:bloom_mobile/services/role.dart';
 import 'package:flutter/material.dart';
+
+import '../components/snackbar.dart';
+import '../services/address.dart';
+import '../services/auth.dart';
+import '../services/role.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -364,7 +365,8 @@ class _RegisterPage extends State<RegisterPage> {
         border: const OutlineInputBorder(),
         contentPadding: const EdgeInsets.only(left: 10),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
+          borderSide:
+              BorderSide(color: Theme.of(context).colorScheme.secondary),
         ),
         hintText: hintText,
       ),
