@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'navigations/bottom_navbar.dart';
 import 'screens/chat.dart';
+import 'screens/product_detail.dart';
 import 'themes/dark_theme.dart';
 import 'themes/light_theme.dart';
 
@@ -12,7 +13,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,7 +23,8 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       routes: {
         '/': (context) => const BottomNavbar(),
-        Chat.routName: (context) => const Chat()
+        Chat.routName: (context) => const Chat(),
+        ProductDetail.routeName: (context) => const ProductDetail(),
       },
     );
   }
