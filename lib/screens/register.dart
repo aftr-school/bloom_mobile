@@ -15,17 +15,19 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPage extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
 
   bool isLoading = false;
 
   Future<void> handleSubmit() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+
+      print(village);
 
       await AuthService().registerService(
         Register(
@@ -142,32 +144,31 @@ class _RegisterPage extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.only(top: 50, left: 20, right: 20),
-          child: Column(children: [
-            Container(
-              padding: const EdgeInsets.all((25)),
-              child: Column(children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 5),
-                  child: const Text(
-                    "Sign up",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
-                  ),
+      body: ListView(
+        physics: const BouncingScrollPhysics(),
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 5),
+                child: const Text(
+                  "Sign up",
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 25),
-                  child: const Text(
-                    "Please Sign up to continue",
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(bottom: 25),
+                child: const Text(
+                  "Please Sign up to continue",
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
-                registerForm()
-              ]),
-            ),
-          ]),
-        ),
+              ),
+              registerForm()
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -175,178 +176,218 @@ class _RegisterPage extends State<RegisterPage> {
   Widget registerForm() {
     return Form(
       key: _formKey,
-      child: Wrap(
-        runSpacing: 20,
-        children: <Widget>[
+      child: Column(
+        children: [
           textField(nameController, 'Name'),
           textField(usernameController, 'Username'),
           textField(emailController, 'Email'),
           textField(passwordController, 'Password'),
           textField(addressController, 'Address'),
-          DropdownButtonFormField(
-            key: _key,
-            elevation: 16,
-            onChanged: (newValue) {
-              setState(() {
-                role = newValue!;
-              });
-            },
-            hint: const Text('Plih Role'),
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelStyle: Theme.of(context).textTheme.labelMedium,
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).primaryColor),
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-              ),
-            ),
-            items: listRole.map((value) {
-              return DropdownMenuItem(
-                value: value['id'],
-                child: Text(
-                  value['name'],
-                  style: Theme.of(context).textTheme.labelMedium,
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+            child: DropdownButtonFormField(
+              key: _key,
+              onChanged: (newValue) {
+                setState(() {
+                  role = newValue!;
+                });
+              },
+              decoration: InputDecoration(
+                hintText: 'Role',
+                contentPadding: const EdgeInsets.all(12),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
                 ),
-              );
-            }).toList(),
-          ),
-          DropdownButtonFormField(
-            key: _keyProvince,
-            elevation: 16,
-            onChanged: (String? newValue) {
-              setState(() {
-                province = newValue!;
-              });
-              getRegencies(int.parse(newValue!));
-            },
-            hint: const Text("Pilih Provinsi"),
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelStyle: Theme.of(context).textTheme.labelMedium,
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).primaryColor),
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-              ),
-            ),
-            items: listProvince.map((value) {
-              return DropdownMenuItem<String>(
-                value: value['id'],
-                child: Text(
-                  value['name'],
-                  style: Theme.of(context).textTheme.labelMedium,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
                 ),
-              );
-            }).toList(),
-          ),
-          DropdownButtonFormField(
-            key: _keyRegency,
-            elevation: 16,
-            onChanged: (String? newValue) {
-              setState(() {
-                regency = newValue!;
-              });
-              getDistrict(int.parse(newValue!));
-            },
-            hint: const Text("Pilih Kota"),
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
+                hintStyle: Theme.of(context).textTheme.labelMedium,
               ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelStyle: Theme.of(context).textTheme.labelMedium,
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).primaryColor),
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-              ),
+              items: listRole.map((value) {
+                return DropdownMenuItem(
+                  value: value['id'],
+                  child: Text(
+                    value['name'],
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                );
+              }).toList(),
             ),
-            items: listRegency.map((value) {
-              return DropdownMenuItem<String>(
-                value: value['id'],
-                child: Text(
-                  value['name'],
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-              );
-            }).toList(),
-          ),
-          DropdownButtonFormField(
-            key: _keyDistrict,
-            elevation: 16,
-            onChanged: (String? newValue) {
-              setState(() {
-                district = newValue!;
-              });
-              getVillage(int.parse(newValue!));
-            },
-            hint: const Text("Pilih Kecamatan"),
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelStyle: Theme.of(context).textTheme.labelMedium,
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).primaryColor),
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-              ),
-            ),
-            items: listDistrict.map((value) {
-              return DropdownMenuItem<String>(
-                value: value['id'],
-                child: Text(
-                  value['name'],
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-              );
-            }).toList(),
-          ),
-          DropdownButtonFormField(
-            key: _keyVillage,
-            elevation: 16,
-            onChanged: (String? newValue) {
-              setState(() {
-                village = newValue!;
-              });
-            },
-            hint: const Text("Pilih Desa"),
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelStyle: Theme.of(context).textTheme.labelMedium,
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).primaryColor),
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-              ),
-            ),
-            items: listVillage.map((value) {
-              return DropdownMenuItem<String>(
-                value: value['id'],
-                child: Text(
-                  value['name'],
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-              );
-            }).toList(),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 10),
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+            child: DropdownButtonFormField(
+              key: _keyProvince,
+              onChanged: (String? newValue) {
+                setState(() {
+                  province = newValue!;
+                  getRegencies(int.parse(newValue));
+                });
+              },
+              disabledHint: Text(
+                'Provinces',
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              decoration: InputDecoration(
+                hintText: 'Provinces',
+                contentPadding: const EdgeInsets.all(12),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+                hintStyle: Theme.of(context).textTheme.labelMedium,
+              ),
+              items: listProvince.map((value) {
+                return DropdownMenuItem<String>(
+                  value: value['id'],
+                  child: Text(
+                    value['name'],
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+            child: DropdownButtonFormField(
+              key: _keyRegency,
+              onChanged: (String? newValue) {
+                setState(() {
+                  regency = newValue!;
+                  getDistrict(int.parse(newValue));
+                });
+              },
+              disabledHint: Text(
+                'Regencies',
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              decoration: InputDecoration(
+                hintText: 'Regencies',
+                contentPadding: const EdgeInsets.all(12),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+                hintStyle: Theme.of(context).textTheme.labelMedium,
+              ),
+              items: listRegency.map((value) {
+                return DropdownMenuItem<String>(
+                  value: value['id'],
+                  child: Text(
+                    value['name'],
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+            child: DropdownButtonFormField(
+              key: _keyDistrict,
+              onChanged: (String? newValue) {
+                setState(() {
+                  district = newValue!;
+                  getVillage(int.parse(newValue));
+                });
+              },
+              disabledHint: Text(
+                'Districts',
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              decoration: InputDecoration(
+                hintText: 'Districts',
+                contentPadding: const EdgeInsets.all(12),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+                hintStyle: Theme.of(context).textTheme.labelMedium,
+              ),
+              items: listDistrict.map((value) {
+                return DropdownMenuItem<String>(
+                  value: value['id'],
+                  child: Text(
+                    value['name'],
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+            child: DropdownButtonFormField(
+              key: _keyVillage,
+              elevation: 16,
+              onChanged: (String? newValue) {
+                setState(() {
+                  village = newValue!;
+                });
+              },
+              disabledHint: Text(
+                'Villages',
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              decoration: InputDecoration(
+                hintText: 'Villages',
+                contentPadding: const EdgeInsets.all(12),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+                hintStyle: Theme.of(context).textTheme.labelMedium,
+              ),
+              items: listVillage.map((value) {
+                return DropdownMenuItem<String>(
+                  value: value['id'],
+                  child: Text(
+                    value['name'],
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
             alignment: Alignment.bottomRight,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
+                enableFeedback: false,
                 minimumSize: const Size.fromHeight(40),
                 primary: Theme.of(context).colorScheme.secondary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
               ),
               onPressed: handleSubmit,
               child: const Text(
-                "Sign in",
+                'Sign in',
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -359,18 +400,25 @@ class _RegisterPage extends State<RegisterPage> {
   }
 
   Widget textField(controller, hintText) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(
-        border: const OutlineInputBorder(),
-        contentPadding: const EdgeInsets.only(left: 10),
-        focusedBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(color: Theme.of(context).colorScheme.secondary),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+      child: TextFormField(
+        controller: controller,
+        decoration: InputDecoration(
+          hintText: hintText,
+          contentPadding: const EdgeInsets.all(16),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          ),
         ),
-        hintText: hintText,
+        style: Theme.of(context).textTheme.labelMedium,
       ),
-      style: Theme.of(context).textTheme.labelMedium,
     );
   }
 }
