@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/profile_buttons.dart';
+import '../widgets/profile_grid.dart';
 import '../widgets/profile_header.dart';
 
 class Profile extends StatelessWidget {
@@ -8,18 +10,11 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: [
-        const ProfileHeader(),
-        Container(
-          margin: const EdgeInsets.all(16),
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).colorScheme.secondary,
-            ),
-            child: const Text('Edit Profile'),
-          ),
-        )
+      physics: const BouncingScrollPhysics(),
+      children: const [
+        ProfileHeader(),
+        ProfileButtons(),
+        ProfileGrid(),
       ],
     );
   }
