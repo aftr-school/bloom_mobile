@@ -41,7 +41,7 @@ class TransactionCheckout extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () => Get.toNamed(Order.routName),
+              onPressed: () => Get.toNamed(Order.routeName),
               style: ElevatedButton.styleFrom(
                 enableFeedback: false,
                 primary: Theme.of(context).colorScheme.secondary,

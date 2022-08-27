@@ -5,7 +5,7 @@ import '../widgets/order_total_amounts.dart';
 import '../widgets/transaction_amounts.dart';
 
 class Order extends StatelessWidget {
-  static const String routName = '/order';
+  static const String routeName = '/order';
 
   const Order({Key? key}) : super(key: key);
 

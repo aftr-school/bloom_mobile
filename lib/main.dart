@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: ProductDetail.routeName, page: () => const ProductDetail()),
         GetPage(name: Transaction.routName, page: () => const Transaction()),
-        GetPage(name: Order.routName, page: () => const Order()),
+        GetPage(name: Order.routeName, page: () => const Order()),
       ],
     );
   }
