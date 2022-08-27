@@ -36,3 +36,23 @@ class Body {
     );
   }
 }
+
+class HttpResponseWithError {
+  final int statusCode;
+  final Body body;
+  final raw;
+
+  const HttpResponseWithError({
+    required this.statusCode,
+    required this.body,
+    required this.raw,
+  });
+
+  factory HttpResponseWithError.fromJson(statusCode, body, raw) {
+    return HttpResponseWithError(
+      statusCode: statusCode,
+      body: Body.fromJson(jsonDecode(body)),
+      raw: raw,
+    );
+  }
+}

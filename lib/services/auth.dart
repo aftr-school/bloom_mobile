@@ -63,7 +63,7 @@ class AuthService {
 
   registerService(Register data) async {
     try {
-      HttpResponseWithError res = await _register(data);
+      final res = await _register(data);
 
       print(res.raw);
 
