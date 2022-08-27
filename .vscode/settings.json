@@ -6,6 +6,7 @@
     "chats",
     "orders",
     "profile",
-    "products"
+    "products",
+    "transaction"
   ]
 }

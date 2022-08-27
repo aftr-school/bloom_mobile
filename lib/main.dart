@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'navigations/bottom_navbar.dart';
 import 'screens/chat.dart';
 import 'screens/product_detail.dart';
+import 'screens/transaction.dart';
 import 'themes/dark_theme.dart';
 import 'themes/light_theme.dart';
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const BottomNavbar(),
         Chat.routName: (context) => const Chat(),
         ProductDetail.routeName: (context) => const ProductDetail(),
+        Transaction.routName: (context) => const Transaction(),
       },
     );
   }
