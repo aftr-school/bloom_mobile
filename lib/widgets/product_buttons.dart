@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/transaction.dart';
+
 class ProductButtons extends StatelessWidget {
   const ProductButtons({Key? key}) : super(key: key);
 
@@ -31,7 +33,8 @@ class ProductButtons extends StatelessWidget {
           const SizedBox(width: 16),
           Expanded(
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(Transaction.routName),
               style: ElevatedButton.styleFrom(
                 enableFeedback: false,
                 primary: Theme.of(context).colorScheme.secondary,

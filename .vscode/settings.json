@@ -6,6 +6,8 @@
     "chats",
     "orders",
     "profile",
+    "products",
+    "transaction",
     "services",
     "global",
     "components",

@@ -3,7 +3,11 @@ import 'package:get/get.dart';
 
 import 'package:bloom_mobile/services/auth.dart';
 
+import '../services/auth.dart';
+
 class LoginPage extends StatefulWidget {
+  static const String routeName = '/login';
+
   const LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -74,7 +78,8 @@ class _LoginPage extends State<LoginPage> {
               border: const OutlineInputBorder(),
               contentPadding: const EdgeInsets.only(left: 10),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
+                borderSide:
+                    BorderSide(color: Theme.of(context).colorScheme.secondary),
               ),
               hintText: 'username',
             ),
@@ -86,7 +91,8 @@ class _LoginPage extends State<LoginPage> {
               border: const OutlineInputBorder(),
               contentPadding: const EdgeInsets.only(left: 10),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
+                borderSide:
+                    BorderSide(color: Theme.of(context).colorScheme.secondary),
               ),
               hintText: 'Password',
             ),
