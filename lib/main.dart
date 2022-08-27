@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'screens/splashscreen.dart';
 import 'screens/login.dart';
+import 'screens/register.dart';
 
 import 'navigations/bottom_navbar.dart';
 import 'screens/chat.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/splash', page: () => const SplashScreen()),
         GetPage(name: '/login', page: () => const LoginPage()),
+        GetPage(name: '/register', page: () => const RegisterPage()),
         GetPage(name: '/', page: () => const BottomNavbar()),
         GetPage(name: '/chat', page: () => const Chat()),
         GetPage(name: '/product-detail', page: () => const ProductDetail()),

@@ -21,18 +21,18 @@ class AuthService {
         "username": data.username,
         "email": data.email,
         "password": data.password,
-        "roleId": data.roleId,
+        "roleId": data.roleId.toString(),
         "address": data.address,
-        "regenciesId": data.regenciesId,
-        "villagesId": data.villagesId,
-        "districtsId": data.districtsId,
-        "provincesId": data.provincesId,
+        "regenciesId": data.regenciesId.toString(),
+        "villagesId": data.villagesId.toString(),
+        "districtsId": data.districtsId.toString(),
+        "provincesId": data.provincesId.toString(),
         "latitude": data.latitude,
         "longitude": data.longitude,
       },
     );
 
-    return HttpResponse.fromJson(res.statusCode, res.body);
+    HttpResponseWithError.fromJson(res.statusCode, res.body, res);
   }
 
   _login(Login data) async {
@@ -63,10 +63,12 @@ class AuthService {
 
   registerService(Register data) async {
     try {
-      HttpResponse res = await _register(data);
+      HttpResponseWithError res = await _register(data);
+
+      print(res.raw);
 
       if (res.statusCode == 422) {
-        snackbarError('username or email have been used');
+        snackbarError(res.raw);
       } else if (res.body.status == 'success') {
         snackbarSuccess(res.body.message);
       } else {

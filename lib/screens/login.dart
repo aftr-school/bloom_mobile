@@ -1,5 +1,7 @@
-import 'package:bloom_mobile/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'package:bloom_mobile/services/auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -108,6 +110,10 @@ class _LoginPage extends State<LoginPage> {
               ),
             ),
           ),
+          TextButton(
+            onPressed: () => Get.toNamed('register'),
+            child: const Text("Register here", style: TextStyle(color: Colors.blue)),
+          )
         ],
       ),
     );
