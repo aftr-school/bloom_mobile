@@ -71,7 +71,7 @@ class AuthService {
 
       if (res.statusCode == 422) {
         snackbarError(jsonDecode(res.raw.body).toString());
-      } else if (res.statusCode == 200) {
+      } else if (res.statusCode == 201) {
         Get.offNamed('login');
 
         snackbarSuccess(res.body.message);
