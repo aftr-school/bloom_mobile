@@ -20,7 +20,7 @@ class HttpResponse {
 class Body {
   final String status;
   final String message;
-  final Object data; // object type here, means 'any' type
+  final data; // object type here, means 'any' type
 
   const Body({
     required this.status,
