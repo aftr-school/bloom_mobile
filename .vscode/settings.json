@@ -5,6 +5,9 @@
     "home",
     "chats",
     "orders",
-    "profile"
+    "profile",
+    "services",
+    "global",
+    "components"
   ]
 }
