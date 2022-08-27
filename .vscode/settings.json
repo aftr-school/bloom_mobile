@@ -9,6 +9,7 @@
     "services",
     "global",
     "components",
-    "products"
+    "products",
+    "screen"
   ]
 }

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+import './screens/splashscreen.dart';
 import 'navigations/bottom_navbar.dart';
 import 'screens/chat.dart';
 import 'screens/product_detail.dart';
 import 'themes/dark_theme.dart';
 import 'themes/light_theme.dart';
-
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   await dotenv.load();
@@ -26,8 +27,9 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
-      initialRoute: '/',
+      initialRoute: '/splash',
       getPages: [
+        GetPage(name: '/splash', page: () => const SplashScreen()),
         GetPage(name: '/', page: () => const BottomNavbar()),
         GetPage(name: '/chat', page: () => const Chat()),
         GetPage(name: '/product-detail', page: () => const ProductDetail()),
