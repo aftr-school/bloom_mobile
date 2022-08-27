@@ -49,7 +49,7 @@ class AuthService {
     return HttpResponse.fromJson(res.statusCode, res.body);
   }
 
-  _get() async {
+  _get(token) async {
     final res = await http.get(Uri.parse('$api/api/auth/user'), headers: {
       "Authorization": "Bearer $token",
     });
@@ -85,10 +85,11 @@ class AuthService {
     try {
       HttpResponse res = await _login(data);
 
-      if (res.body.status == 'success') {
-        HttpResponse user = await _get();
+      storage.write('token', res.body.data['token']);
 
-        storage.write('token', res.body.data['token']);
+      if (res.body.status == 'success') {
+        HttpResponse user = await _get(res.body.data['token']);
+
         storage.write('name', user.body.data['name']);
 
         Get.offNamed('/');
