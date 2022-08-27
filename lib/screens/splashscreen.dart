@@ -18,7 +18,7 @@ class SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      storage.hasData('token') ? Get.offNamed('/') : Get.offNamed('/');
+      storage.hasData('token') ? Get.offNamed('/') : Get.offNamed('/login');
     });
   }
 
