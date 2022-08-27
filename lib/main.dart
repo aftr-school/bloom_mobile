@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'navigations/bottom_navbar.dart';
+import 'screens/chat.dart';
+import 'screens/product_detail.dart';
 import 'themes/dark_theme.dart';
 import 'themes/light_theme.dart';
 
@@ -16,7 +18,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       getPages: [
         GetPage(name: '/', page: () => const BottomNavbar()),
+        GetPage(name: '/chat', page: () => const Chat()),
+        GetPage(name: '/product-detail', page: () => const ProductDetail()),
       ],
     );
   }
