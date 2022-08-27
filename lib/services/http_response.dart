@@ -18,19 +18,19 @@ class HttpResponse {
 }
 
 class Body {
-  final String status;
+  // final String status;
   final String message;
   final data; // object type here, means 'any' type
 
   const Body({
-    required this.status,
+    // required this.status,
     required this.message,
     required this.data,
   });
 
   factory Body.fromJson(Map<String, dynamic> json) {
     return Body(
-      status: json['status'],
+      // status: json['status'],
       message: json['message'],
       data: json['data'],
     );
