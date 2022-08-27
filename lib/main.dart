@@ -30,9 +30,9 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       initialRoute: '/splash',
       getPages: [
-        GetPage(name: '/splash', page: () => const SplashScreen()),
-        GetPage(name: '/login', page: () => const LoginPage()),
         GetPage(name: '/', page: () => const BottomNavbar()),
+        GetPage(name: SplashScreen.routeName, page: () => const SplashScreen()),
+        GetPage(name: LoginPage.routeName, page: () => const LoginPage()),
         GetPage(name: Chat.routName, page: () => const Chat()),
         GetPage(
             name: ProductDetail.routeName, page: () => const ProductDetail()),

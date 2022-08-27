@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../services/auth.dart';
 
 class LoginPage extends StatefulWidget {
+  static const String routeName = '/login';
+
   const LoginPage({Key? key}) : super(key: key);
 
   @override

@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const String routeName = '/splash';
+
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
@@ -31,7 +33,10 @@ class SplashScreenState extends State<SplashScreen> {
           children: const [
             Text(
               'Bloom',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, letterSpacing: 2.0),
+              style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300,
+                  letterSpacing: 2.0),
             ),
           ],
         ),
