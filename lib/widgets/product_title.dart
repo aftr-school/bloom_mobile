@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 
 class ProductTitle extends StatelessWidget {
-  const ProductTitle({Key? key}) : super(key: key);
+  final String title;
+  final int price;
+  final int qty;
+  final String uom;
+
+  const ProductTitle({
+    Key? key,
+    required this.title,
+    required this.price,
+    required this.qty,
+    required this.uom,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,13 +22,13 @@ class ProductTitle extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Beras kualitas super duper',
+            title,
             style: Theme.of(context).textTheme.headline6,
           ),
           Row(
             children: [
               Text(
-                'Rp50.000',
+                'Rp$price',
                 style: Theme.of(context)
                     .textTheme
                     .headline5!
@@ -31,7 +42,7 @@ class ProductTitle extends StatelessWidget {
                   color: Theme.of(context).colorScheme.secondary,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Text('Qty: 30kg'),
+                child: Text('Qty: $qty $uom'),
               ),
             ],
           )

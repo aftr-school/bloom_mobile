@@ -10,7 +10,7 @@ class ProfileGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(ProductDetail.routeName),
+      onTap: () => Get.toNamed(ProductDetail.routeName, arguments: data),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: GridTile(
