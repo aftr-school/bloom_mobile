@@ -5,6 +5,13 @@
     "home",
     "chats",
     "orders",
-    "profile"
+    "profile",
+    "products",
+    "transaction",
+    "services",
+    "global",
+    "components",
+    "products",
+    "screen"
   ]
 }

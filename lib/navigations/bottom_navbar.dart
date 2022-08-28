@@ -15,7 +15,7 @@ class BottomNavbar extends StatefulWidget {
 class _BottomNavbarState extends State<BottomNavbar> {
   final List<Map<String, Object>> _screens = [
     {
-      'title': 'Junes',
+      'title': 'Bloom',
       'screen': const Home(),
     },
     {
@@ -38,7 +38,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Junes'),
+        title: Text(_screens[_screenIndex]['title'] as String),
       ),
       body: _screens[_screenIndex]['screen'] as Widget,
       bottomNavigationBar: BottomNavigationBar(
