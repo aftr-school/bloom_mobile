@@ -1,10 +1,8 @@
 import 'package:bloom_mobile/services/product.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../components/snackbar.dart';
-import '../services/address.dart';
-import '../services/auth.dart';
-import '../services/role.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({Key? key}) : super(key: key);
@@ -36,6 +34,8 @@ class _AddProduct extends State<AddProduct> {
         qunatity: int.parse(quantityController.text),
         uom: uom,
       ));
+
+      Get.back();
     }
   }
 
@@ -66,117 +66,117 @@ class _AddProduct extends State<AddProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.only(top: 50, left: 20, right: 20),
-          child: Column(children: [
-            Container(
-              padding: const EdgeInsets.all((25)),
-              child: Column(children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 5),
-                  child: const Text(
-                    "Tambah Product",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 25),
-                  child: const Text(
-                    "isi form dibawah",
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ),
-                registerForm()
-              ]),
+      appBar: AppBar(),
+      body: ListView(
+        physics: const BouncingScrollPhysics(),
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+            child: const Text(
+              'Add Product',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+              textAlign: TextAlign.center,
             ),
-          ]),
-        ),
+          ),
+          addForm()
+        ],
       ),
     );
   }
 
-  Widget registerForm() {
+  Widget addForm() {
     return Form(
       key: _formKey,
-      child: Wrap(
-        runSpacing: 20,
-        children: <Widget>[
+      child: Column(
+        children: [
           textField(nameController, 'Name', 'text'),
-          DropdownButtonFormField(
-            key: _keyCategory,
-            elevation: 16,
-            onChanged: (newValue) {
-              setState(() {
-                category = newValue!;
-              });
-            },
-            hint: const Text('Plih Product Category'),
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelStyle: Theme.of(context).textTheme.labelMedium,
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).primaryColor),
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-              ),
-            ),
-            items: listCategory.map((value) {
-              return DropdownMenuItem(
-                value: value['id'],
-                child: Text(
-                  value['name'],
-                  style: Theme.of(context).textTheme.labelMedium,
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+            child: DropdownButtonFormField(
+              key: _keyCategory,
+              elevation: 16,
+              onChanged: (newValue) {
+                setState(() {
+                  category = newValue!;
+                });
+              },
+              decoration: InputDecoration(
+                hintText: 'Categories',
+                contentPadding: const EdgeInsets.all(12),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
                 ),
-              );
-            }).toList(),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+                hintStyle: Theme.of(context).textTheme.labelMedium,
+              ),
+              items: listCategory.map((value) {
+                return DropdownMenuItem(
+                  value: value['id'],
+                  child: Text(
+                    value['name'],
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                );
+              }).toList(),
+            ),
           ),
           textField(priceController, 'Price', 'number'),
           textField(quantityController, 'Quantity', 'number'),
-          DropdownButtonFormField(
-            key: _keyUom,
-            elevation: 16,
-            onChanged: (newValue) {
-              setState(() {
-                uom = newValue!;
-              });
-            },
-            hint: const Text('Plih Uom'),
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              labelStyle: Theme.of(context).textTheme.labelMedium,
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).primaryColor),
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-              ),
-            ),
-            items: ['kg', 'liter', 'unit'].map((value) {
-              return DropdownMenuItem(
-                value: value,
-                child: Text(
-                  value,
-                  style: Theme.of(context).textTheme.labelMedium,
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+            child: DropdownButtonFormField(
+              key: _keyUom,
+              elevation: 16,
+              onChanged: (newValue) {
+                setState(() {
+                  uom = newValue!;
+                });
+              },
+              decoration: InputDecoration(
+                hintText: 'Unit of measurement',
+                contentPadding: const EdgeInsets.all(12),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
                 ),
-              );
-            }).toList(),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+                hintStyle: Theme.of(context).textTheme.labelMedium,
+              ),
+              items: ['kg', 'liter', 'unit'].map((value) {
+                return DropdownMenuItem(
+                  value: value,
+                  child: Text(
+                    value,
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                );
+              }).toList(),
+            ),
           ),
           textField(anualHarvestController, 'Anual Harvest', 'number'),
           Container(
-            margin: const EdgeInsets.only(top: 10),
-            alignment: Alignment.bottomRight,
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+            width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: const Size.fromHeight(40),
+                enableFeedback: false,
                 primary: Theme.of(context).colorScheme.secondary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
               ),
               onPressed: handleSubmit,
               child: const Text(
-                "Save",
+                'Save',
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -189,18 +189,27 @@ class _AddProduct extends State<AddProduct> {
   }
 
   Widget textField(controller, hintText, type) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(
-        border: const OutlineInputBorder(),
-        contentPadding: const EdgeInsets.only(left: 10),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+      child: TextFormField(
+        controller: controller,
+        decoration: InputDecoration(
+          hintText: hintText,
+          contentPadding: const EdgeInsets.all(16),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          ),
         ),
-        hintText: hintText,
+        style: Theme.of(context).textTheme.labelMedium,
+        keyboardType:
+            type == 'number' ? TextInputType.number : TextInputType.text,
       ),
-      style: Theme.of(context).textTheme.labelMedium,
-      keyboardType: type == 'number' ? TextInputType.number : TextInputType.text,
     );
   }
 }

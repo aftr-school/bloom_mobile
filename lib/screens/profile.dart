@@ -14,17 +14,14 @@ class Profile extends StatefulWidget {
 }
 
 class _Profile extends State<Profile> {
-  var data;
+  // var data;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+  void _stateChange() => setState(() {});
 
   @override
   Widget build(BuildContext context) {
     return ListView(
+      physics: const BouncingScrollPhysics(),
       children: [
         FutureBuilder(
           future: UserService().get(),
@@ -35,7 +32,7 @@ class _Profile extends State<Profile> {
                 physics: const BouncingScrollPhysics(),
                 children: [
                   ProfileHeader(data: snapshot.data),
-                  ProfileButtons(),
+                  ProfileButtons(stateChange: _stateChange),
                 ],
               );
             } else if (snapshot.hasError) {
@@ -61,8 +58,6 @@ class _Profile extends State<Profile> {
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
-
-            // By default, show a loading spinner.
             return const CircularProgressIndicator();
           },
         )
