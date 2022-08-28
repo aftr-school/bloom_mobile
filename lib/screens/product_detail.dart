@@ -1,9 +1,9 @@
-import 'package:bloom_mobile/widgets/product_title.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../widgets/product_buttons.dart';
 import '../widgets/product_images.dart';
+import '../widgets/product_title.dart';
 
 class ProductDetail extends StatelessWidget {
   static const String routeName = '/product-detail';
