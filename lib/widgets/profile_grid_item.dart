@@ -21,18 +21,22 @@ class ProfileGridItem extends StatelessWidget {
                 margin: const EdgeInsets.all(16),
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                 decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary.withOpacity(0.8),
+                    color: Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withOpacity(0.8),
                     borderRadius: BorderRadius.circular(6)),
                 child: Text(
-                  data['name'],
+                  data['productCategory']['name'],
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               )
             ],
           ),
           footer: GridTileBar(
-            title: const Text('Padi Kualitas tinggi'),
-            subtitle: Text('Rp${data['productFarmer']['price']} / ${data['uom']}'),
+            title: Text(data['name']),
+            subtitle:
+                Text('Rp${data['productFarmer']['price']} / ${data['uom']}'),
             backgroundColor: Theme.of(context).cardTheme.color,
           ),
           child: Image.network(

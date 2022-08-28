@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import '../services/auth.dart';
 
 class ProfileButtons extends StatelessWidget {
-  const ProfileButtons({Key? key}) : super(key: key);
+  final VoidCallback stateChange;
+
+  const ProfileButtons({Key? key, required this.stateChange}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,8 @@ class ProfileButtons extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ElevatedButton(
-            onPressed: () => Get.toNamed('add-product'),
+            onPressed: () =>
+                Get.toNamed('add-product')?.then((_) => stateChange()),
             style: ElevatedButton.styleFrom(
               enableFeedback: false,
               primary: Theme.of(context).colorScheme.secondary,

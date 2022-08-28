@@ -14,7 +14,9 @@ class Profile extends StatefulWidget {
 }
 
 class _Profile extends State<Profile> {
-  var data;
+  // var data;
+
+  void _stateChange() => setState(() {});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class _Profile extends State<Profile> {
                 physics: const BouncingScrollPhysics(),
                 children: [
                   ProfileHeader(data: snapshot.data),
-                  const ProfileButtons(),
+                  ProfileButtons(stateChange: _stateChange),
                 ],
               );
             } else if (snapshot.hasError) {
