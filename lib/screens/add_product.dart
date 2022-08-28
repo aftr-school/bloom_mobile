@@ -1,8 +1,8 @@
-import 'package:bloom_mobile/services/product.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../components/snackbar.dart';
+import '../services/product.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({Key? key}) : super(key: key);

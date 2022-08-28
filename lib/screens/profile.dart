@@ -1,7 +1,7 @@
-import 'package:bloom_mobile/services/product.dart';
-import 'package:bloom_mobile/services/user.dart';
 import 'package:flutter/material.dart';
 
+import '../services/product.dart';
+import '../services/user.dart';
 import '../widgets/profile_buttons.dart';
 import '../widgets/profile_grid.dart';
 import '../widgets/profile_header.dart';

@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart' as http;
 
-import 'package:bloom_mobile/components/snackbar.dart';
-import 'package:bloom_mobile/services/http_response.dart';
+import '../components/snackbar.dart';
+import 'http_response.dart';
 
 var api = dotenv.env['API_URL']!;
 
@@ -17,7 +17,8 @@ class ProductService {
 
   Future get() async {
     try {
-      final res = await http.get(Uri.parse('$api/api/product/farmer/$userId'), headers: {
+      final res = await http
+          .get(Uri.parse('$api/api/product/farmer/$userId'), headers: {
         "Authorization": "Bearer $token",
       });
 
@@ -40,7 +41,8 @@ class ProductService {
         'anual_harvest': data.anualHarvest.toString(),
       });
 
-      var newData = HttpResponseWithError.fromJson(res.statusCode, res.body, res);
+      var newData =
+          HttpResponseWithError.fromJson(res.statusCode, res.body, res);
       if (newData.statusCode == 422) {
         snackbarError(jsonDecode(newData.raw.body).toString());
       }
@@ -53,7 +55,8 @@ class ProductService {
 
   getCategory() async {
     try {
-      final res = await http.get(Uri.parse('$api/api/datamaster/product/category'), headers: {
+      final res = await http
+          .get(Uri.parse('$api/api/datamaster/product/category'), headers: {
         "Authorization": "Bearer $token",
       });
 

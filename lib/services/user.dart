@@ -1,9 +1,9 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart' as http;
 
-import 'package:bloom_mobile/components/snackbar.dart';
-import 'package:bloom_mobile/services/http_response.dart';
+import '../components/snackbar.dart';
+import 'http_response.dart';
 
 var api = dotenv.env['API_URL']!;
 
