@@ -24,4 +24,19 @@ class UserService {
       snackbarError(e.toString());
     }
   }
+
+  getArea(lat, long) async {
+    try {
+      final res = await http.get(
+        Uri.parse('$api/api/users?lat=$lat&long=$long&radius=50'),
+        headers: {
+          "Authorization": "Bearer $token",
+        },
+      );
+
+      return HttpResponse.fromJson(res.statusCode, res.body).body.data;
+    } catch (e) {
+      snackbarError(e.toString());
+    }
+  }
 }

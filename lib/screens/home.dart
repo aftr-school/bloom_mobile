@@ -58,12 +58,36 @@ class _Home extends State<Home> {
     });
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   void onMapcreated(GoogleMapController controller) {
     setState(() {
-      _markers.add(Marker(
-        markerId: const MarkerId('Home'),
-        position: LatLng(lat ?? 0.0, lng ?? 0.0),
-        infoWindow: const InfoWindow(title: 'Your Location'),
+      _markers.add(const Marker(
+        markerId: MarkerId('Home'),
+        position: LatLng(-7.0432800, 107.5438600),
+        infoWindow: InfoWindow(title: 'Your Location'),
+      ));
+
+      _markers.add(const Marker(
+        markerId: MarkerId('Distibutor ayam'),
+        position: LatLng(-7.0473800, 107.5449600),
+        infoWindow: InfoWindow(title: 'Distibutor ayam'),
+      ));
+
+      _markers.add(const Marker(
+        markerId: MarkerId('Distibutor kangkung'),
+        position: LatLng(-7.0417800, 107.5533600),
+        infoWindow: InfoWindow(title: 'Distibutor kangkung'),
+      ));
+
+      _markers.add(const Marker(
+        markerId: MarkerId('Distibutor susu sapi'),
+        position: LatLng(-7.0441800, 107.5402600),
+        infoWindow: InfoWindow(title: 'Distibutor susu sapi'),
       ));
     });
   }
