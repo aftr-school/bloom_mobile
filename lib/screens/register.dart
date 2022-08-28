@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 
 import '../components/snackbar.dart';
 import '../services/address.dart';
@@ -14,6 +15,39 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPage extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
+
+  Location location = Location();
+
+  var lat;
+  var lng;
+  getLocation() async {
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
+    LocationData locationData;
+
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
+        return;
+      }
+    }
+
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    locationData = await location.getLocation();
+
+    setState(() {
+      lat = locationData.latitude;
+      lng = locationData.longitude;
+    });
+  }
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
@@ -41,8 +75,8 @@ class _RegisterPage extends State<RegisterPage> {
           regenciesId: int.parse(regency),
           districtsId: int.parse(district),
           villagesId: int.parse(village),
-          latitude: '-6.494451239949463',
-          longitude: '106.80363584073018',
+          latitude: lat.toString(),
+          longitude: lng.toString(),
         ),
       );
     }
@@ -137,6 +171,9 @@ class _RegisterPage extends State<RegisterPage> {
   @override
   void initState() {
     super.initState();
+    setState(() {
+      getLocation();
+    });
     getRole();
     getProvinces();
   }
